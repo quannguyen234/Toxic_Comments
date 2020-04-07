@@ -53,7 +53,7 @@ It might be because the definition of each class is not 100% distingushable.
  ### Machine Learning
  #### Losgistic Regression 
  
- - I use Unigram and Bigram for this model. The result was pretty close with Bigram performs a littl better
+ - I use Unigram and Bigram for this model. The result was pretty close with Bigram performs a little better
  
     + Accuracy score for class toxic is 0.9696872380020617
       ROC_AUC score 0.9621475569368099
@@ -77,15 +77,61 @@ It might be because the definition of each class is not 100% distingushable.
       
 ### Deep Learning
 #### LSTM - Baseline Model
+- I train the embeddings for baseline model using the comments from the dataset
+- Architecture: 
+**Input Layer:** Accept a list of encoded sentences that has a dimension of 200 (I set max_length = 200)
+
+**->Embedding Layer:** Output 3D Tensor which is an array of sentences. For each word (200) in a sentence, there is an array of coordinates (128) in the vector space of embedding
+
+**->LSTM Layer:** Recieve a tensor of shape (None, 200, 128) Recursively run the LSTM model for 200 times, passing the coordinates of each word everytime. Output dimension (None, 200, 60)
+
+**->Global Max Pooling Layer:** Reshape 3D tensor to 2D
+
+**->Drop Out Layer:** Randomly disable some nodes -> result in better generalization
+
+**->Densely Connected Layer:** Output passes through a Relu function. Output dimision of 50
+
+**->Drop Out Layer:** 1 more time
+
+**->Densely Connected Layer:** This time with Sigmoid function because we are trying to achieve a binary classification for each of the 6 labels
+
+**Optimizer:** Adam
+
+**Loss Function:** Binary Cross-Entropy
+
+### Word2Vec, GloVe and Fasttext
+- I use the same architecture but instead of LSTM I used Bidirectional LSTM Layer that runs forward and backward at the same time resulting in preservation of information from both past and future
+- I also add LSTM Drop Out and Recurrent Drop Out
+
+## Result
+![](Images/training_loss.png)
+Training loss for Baseline model is the lowest.
+However Validation loss is a lot higher than other models.
 
 
-#### Word2Vec
+![](Images/baseline_word2vec.png)
+![](Images/glove_fasttext.png)
+
+**Looking at other metrics**
+
+Recall indicates how good the model is at picking the correct toxic comments.
+Precision indicates how good the model is at predicting a toxic comment.
+Type I error (False Positive): predict a comment is toxic when it's not.
+Type II error (False Negative): predict a comment is not toxic when in fact it is.
+
+I want to minimize type I error so a model with high recall is better in this case. For example, if we block a comment and that comment is not toxic, then the user who wrote the comment will be angry and might not use our website anymore.
+On the other hand, if a comment is toxic and we let it goes through, other users will likely report it and we can act on it later.
+
+### DEMO
+
+![](Images/demo.png)
 
 
-#### GLoVe
 
+### What's next
+- Data: improve Stratified sampling and Oversampling
+- Model: Tune models and add more layers for better performance
 
-#### Fasttext
 
 
 
