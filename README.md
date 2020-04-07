@@ -49,32 +49,7 @@ It might be because the definition of each class is not 100% distingushable.
  - Split dataset into train, validation and test sets
  
  
- ## Models
- ### Machine Learning
- #### Losgistic Regression 
- 
- - I use Unigram and Bigram for this model. The result was pretty close with Bigram performs a little better
- 
-    + Accuracy score for class toxic is 0.9696872380020617
-      ROC_AUC score 0.9621475569368099
-  
-    + Accuracy score for class severe_toxic is 0.9879955540025602
-      ROC_AUC score 0.967907970612982
-      
-    + Accuracy score for class obscene is 0.9829603485614431
-      ROC_AUC score 0.9748048350254097
-      
-    + Accuracy score for class threat is 0.9985001498661091
-      ROC_AUC score 0.9721954399629433
-    
-    + Accuracy score for class insult is 0.9696139243804807
-      ROC_AUC score 0.95312484050585
-    
-    + Accuracy score for class identity_hate is 0.9938258040214827
-      ROC_AUC score 0.9654340634205124
-      
-    
-      
+## Models
 ### Deep Learning
 #### LSTM - Baseline Model
 - I train the embeddings for baseline model using the comments from the dataset
@@ -106,6 +81,7 @@ It might be because the definition of each class is not 100% distingushable.
 
 ## Result
 ![](Images/training_loss.png)
+
 Training loss for Baseline model is the lowest.
 However Validation loss is a lot higher than other models.
 
