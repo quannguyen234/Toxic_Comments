@@ -79,6 +79,7 @@ It might be because the definition of each class is not 100% distingushable.
 #### LSTM - Baseline Model
 - I train the embeddings for baseline model using the comments from the dataset
 - Architecture: 
+
 **Input Layer:** Accept a list of encoded sentences that has a dimension of 200 (I set max_length = 200)
 
 **->Embedding Layer:** Output 3D Tensor which is an array of sentences. For each word (200) in a sentence, there is an array of coordinates (128) in the vector space of embedding
@@ -114,13 +115,17 @@ However Validation loss is a lot higher than other models.
 
 **Looking at other metrics**
 
-Recall indicates how good the model is at picking the correct toxic comments.
-Precision indicates how good the model is at predicting a toxic comment.
-Type I error (False Positive): predict a comment is toxic when it's not.
-Type II error (False Negative): predict a comment is not toxic when in fact it is.
+**Recall** indicates how good the model is at picking the correct toxic comments.
+
+**Precision** indicates how good the model is at predicting a toxic comment.
+
+**Type I error (False Positive)**: predict a comment is toxic when it's not.
+
+**Type II error (False Negative)**: predict a comment is not toxic when in fact it is.
 
 I want to minimize type I error so a model with high recall is better in this case. For example, if we block a comment and that comment is not toxic, then the user who wrote the comment will be angry and might not use our website anymore.
 On the other hand, if a comment is toxic and we let it goes through, other users will likely report it and we can act on it later.
+
 
 ### DEMO
 
