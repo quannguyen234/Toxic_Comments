@@ -77,6 +77,9 @@ It might be because the definition of each class is not 100% distingushable.
 **Loss Function:** Binary Cross-Entropy
 
 ## Pretrained Embeddings
+
+- I use the same architecture as my custom trained embeddings. But for all three, instead of LSTM I used Bidirectional LSTM Layer that runs forward and backward at the same time resulting in preservation of information from both past and future. I also add LSTM Drop Out and Recurrent Drop Out for better generalization.
+
 ### Word2Vec:
 The main idea is that we train a model on the context of each words with 2 approches: Skip-gram, using the target word to predict its context and Continuous Bag of Word (CBOW), predicting which word is most likely given its context. So similar words will have similar representations.
 
@@ -89,7 +92,6 @@ GloVe is quite similar with Word2Vec, but instead of predicting context given wo
 Instead of using words to build word embeddings, Fasttext uses of part of words and characters. A word becomes its context. The building stones are therefore characters instead of words.
 
 
-- I use the same architecture as my custom trained embeddings. But for all three, instead of LSTM I used Bidirectional LSTM Layer that runs forward and backward at the same time resulting in preservation of information from both past and future. I also add LSTM Drop Out and Recurrent Drop Out for better generalization.
 
 ## Result
 ![](Images/training_loss.png)
