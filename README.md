@@ -3,6 +3,7 @@
 
 ## Project Objectives 
 - Predict the type/level of toxicity of online comments
+- Comparing pretrained Embeddings: Word2Vec, GloVe, Fasttext and custom training embeddings.
 
 ## Business Aspects
 - Provide an overview of the website e.g. if the website has toxic/adult content.
@@ -51,7 +52,7 @@ It might be because the definition of each class is not 100% distingushable.
  
 ## Models
 ### Deep Learning
-#### LSTM - Baseline Model
+#### Custom Train Embedding
 - I train the embeddings for baseline model using the comments from the dataset
 - Architecture: 
 
@@ -75,9 +76,20 @@ It might be because the definition of each class is not 100% distingushable.
 
 **Loss Function:** Binary Cross-Entropy
 
-### Word2Vec, GloVe and Fasttext
-- I use the same architecture but instead of LSTM I used Bidirectional LSTM Layer that runs forward and backward at the same time resulting in preservation of information from both past and future
-- I also add LSTM Drop Out and Recurrent Drop Out
+## Pretrained Embeddings
+### Word2Vec:
+The main idea is that we train a model on the context of each words with 2 approches: Skip-gram, using the target word to predict its context and Continuous Bag of Word (CBOW), predicting which word is most likely given its context. So similar words will have similar representations.
+
+
+#### GloVe:
+GloVe is quite similar with Word2Vec, but instead of predicting context given word, GloVe learns by constructing a co-occurrence matrix (words X context) that basically count how frequently a word appears in a context.
+
+
+####  Fasttext:
+Instead of using words to build word embeddings, Fasttext uses of part of words and characters. A word becomes its context. The building stones are therefore characters instead of words.
+
+
+- I use the same architecture as my custom trained embeddings. But for all three, instead of LSTM I used Bidirectional LSTM Layer that runs forward and backward at the same time resulting in preservation of information from both past and future. I also add LSTM Drop Out and Recurrent Drop Out for better generalization.
 
 ## Result
 ![](Images/training_loss.png)
@@ -91,16 +103,18 @@ However Validation loss is a lot higher than other models.
 
 **Looking at other metrics**
 
-**Recall** indicates how good the model is at picking the correct toxic comments.
+**Recall** indicates how good the model is at retrieving toxic comments.
 
-**Precision** indicates how good the model is at predicting a toxic comment.
+**Precision** indicates how good the model is at predicting toxic comment correctly. #at only retrieving toxic comments
 
 **Type I error (False Positive)**: predict a comment is toxic when it's not.
 
 **Type II error (False Negative)**: predict a comment is not toxic when in fact it is.
 
-I want to minimize type I error so a model with high recall is better in this case. For example, if we block a comment and that comment is not toxic, then the user who wrote the comment will be angry and might not use our website anymore.
-On the other hand, if a comment is toxic and we let it goes through, other users will likely report it and we can act on it later.
+In case of predicting toxic comments, I think a model with high precision is better. For example, if we block a comment and that comment is not toxic, then the user who wrote the comment will be angry and might not use our website anymore. On the other hand, if a comment is toxic and we let it goes through, other users will likely report it and we can act on it later.
+**Word2Vec** is a the best option in this case.
+
+For cases of predicting threat, insult and identity hate, which are more serious and might potentitally happen, a model with high recall that can retrieve all of the comments in those classes is better. For example, if there are 10 death threats and we only able to detect 6 of them, that might be a big problem because there won't be any initial preventions of the other 4 threats that could turn into real actions. **GloVe** is great in this case.
 
 
 ### DEMO
