@@ -116,7 +116,7 @@ However Validation loss is a lot higher than other models.
 In case of predicting toxic comments, I think a model with high precision is better. For example, if we block a comment and that comment is not toxic, then the user who wrote the comment will be angry and might not use our website anymore. On the other hand, if a comment is toxic and we let it goes through, other users will likely report it and we can act on it later.
 **Word2Vec** is a the best option in this case.
 
-For cases of predicting threat, insult and identity hate, which are more serious and might potentitally happen, a model with high recall that can retrieve all of the comments in those classes is better. For example, if there are 10 death threats and we only able to detect 6 of them, that might be a big problem because there won't be any initial preventions of the other 4 threats that could turn into real actions. **GloVe** is great in this case.
+For cases of predicting threat, insult and identity hate, which are more serious and might happen in real life, a model with high recall that can retrieve all of the comments in those classes is better. For example, if there are 10 death threats and we only able to detect 6 of them, that might be a big problem because there won't be any initial preventions of the other 4 threats that could turn into real actions. **GloVe** is great in this case.
 
 
 ### DEMO
